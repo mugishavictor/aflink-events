@@ -2,9 +2,9 @@
 
 :root {
   /* Light base */
-  --bg: 248 250 255;
+  --bg: 0 0 0;
   /* near-white */
-  --fg: green;
+  --fg: 255 255 255;
   /* deep navy text */
   --muted: 80 95 125;
   /* muted text */

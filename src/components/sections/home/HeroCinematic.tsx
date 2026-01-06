@@ -2,130 +2,81 @@ import Link from "next/link";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { GridOverlay } from "@/components/ui/GridOverlay";
+import { HeroVideo } from "@/components/media/HeroVideo"; // the MP4/WebM autoplay component
 
 export function HeroCinematic() {
   return (
-    <section className="relative overflow-hidden">
-      {/* Full-bleed BK glow background */}
+    <section className="relative min-h-[92vh] overflow-hidden bg-black">
+      {/* Background video */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-[rgb(var(--bg))]" />
-        <div
-          className="absolute -top-64 left-1/2 h-[820px] w-[1400px] -translate-x-1/2 rounded-full blur-3xl"
+        <HeroVideo
+          posterSrc="/images/hero.jpeg"
+          videoSrcMp4="/media/hero.mp4"
+          priorityPoster
+          className="mt-12 sm:mt-16"
+        />
+
+        {/* Strong cinematic overlays (Sparks-like) */}
+        <div className="absolute inset-0 bg-black/10" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/10 to-black/15" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/15 to-transparent" />
+
+        {/* Optional noise for premium feel */}
+        <div className="pointer-events-none absolute inset-0 opacity-[0.10] mix-blend-overlay"
           style={{
-            background:
-              "radial-gradient(circle at 35% 35%, rgba(22,92,255,.22), transparent 62%), radial-gradient(circle at 60% 30%, rgba(0,210,255,.12), transparent 60%), radial-gradient(circle at 55% 62%, rgba(120,92,255,.08), transparent 64%)",
+            backgroundImage:
+              "url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22240%22 height=%22240%22%3E%3Cfilter id=%22n%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22240%22 height=%22240%22 filter=%22url(%23n)%22 opacity=%220.25%22/%3E%3C/svg%3E')",
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/40 to-white/85" />
       </div>
 
+      {/* Foreground content */}
       <Container size="full" className="relative">
-        <GridOverlay className="hidden lg:block" />
+        <GridOverlay className="hidden lg:block opacity-30" />
 
-        <div className="relative mx-auto max-w-[1440px] px-5 sm:px-8">
-          <div className="grid gap-10 pb-14 pt-16 lg:grid-cols-12 lg:gap-8 lg:pb-20 lg:pt-20">
-            {/* Copy */}
-            <div className="lg:col-span-5 lg:pt-6">
-              <div className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/80 px-4 py-2 text-[11px] font-medium uppercase tracking-[0.18em] text-[rgb(var(--fg))]/70 shadow-sm">
-                Rwanda-based • Region-ready • End-to-end delivery
-              </div>
-
-              {/* Tagline */}
-              <h1 className="mt-6 text-5xl font-semibold tracking-[-0.03em] text-[rgb(var(--fg))] sm:text-6xl lg:text-7xl xl:text-8xl">
-                Strategic experiences.
-                <span className="block text-[rgb(var(--fg))]/55">Stunning delivery.</span>
-              </h1>
-
-              {/* Quick intro (doc-aligned) */}
-              <p className="mt-6 max-w-[46ch] text-base leading-relaxed text-[rgb(var(--fg))]/70 sm:text-lg">
-                Aflink Events Ltd is the event management wing of Aflink Rwanda Ltd—an advertising and
-                communications agency shaping Rwanda’s marketing landscape since the 2010s—delivering
-                world-class, end-to-end event solutions across Rwanda and the region.
-              </p>
-
-              {/* Who we serve (doc-aligned) */}
-              <p className="mt-4 max-w-[60ch] text-sm leading-relaxed text-[rgb(var(--fg))]/60">
-                Serving association, corporate, government, development partners, and private sector clients.
-              </p>
-
-              {/* Required CTAs */}
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-                <Button href="/request-quote">Request a Quote</Button>
-                <Button href="/request-quote" variant="secondary">
-                  Book Consultation
-                </Button>
-                <Link
-                  href="/contact"
-                  className="text-sm font-medium text-[rgb(var(--fg))]/70 hover:text-[rgb(var(--fg))] transition sm:ml-3"
-                >
-                  WhatsApp / Quick Contact →
-                </Link>
-              </div>
-
-              {/* Trust strip */}
-              <div className="mt-10 flex items-center gap-4 text-sm text-[rgb(var(--fg))]/55">
-                <span className="h-px w-10 bg-black/10" />
-                <span>One-stop events management: design • logistics • communications • production.</span>
-              </div>
-
-              {/* Micro proof */}
-              <div className="mt-8 grid gap-3 sm:grid-cols-3">
-                {[
-                  ["15+ years", "via Aflink Rwanda Ltd"],
-                  ["Rwanda + EAC", "regional capability"],
-                  ["End-to-end", "creative + ops"],
-                ].map(([v, k]) => (
-                  <div
-                    key={k}
-                    className="rounded-2xl border border-black/5 bg-white/70 px-5 py-4 backdrop-blur shadow-[0_10px_28px_rgba(10,16,32,.06)]"
-                  >
-                    <div className="text-lg font-semibold text-[rgb(var(--fg))]">{v}</div>
-                    <div className="mt-1 text-sm text-[rgb(var(--fg))]/60">{k}</div>
-                  </div>
-                ))}
-              </div>
+        <div className="mx-auto max-w-[1440px] px-6 sm:px-10 pt-24 pb-16">
+          <div className="max-w-[780px]">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-[11px] font-medium uppercase tracking-[0.20em] text-white/80 backdrop-blur">
+              Rwanda-based • Region-ready • End-to-end delivery
             </div>
 
-            {/* Media (edge) */}
-            <div className="lg:col-span-7">
-              <div className="relative overflow-hidden rounded-3xl border border-black/5 bg-white shadow-[0_18px_60px_rgba(10,16,32,.10)] lg:rounded-l-3xl lg:rounded-r-none">
-                <div className="relative min-h-[340px] w-full sm:min-h-[420px] lg:min-h-[560px]">
-                  {/* Replace with real video montage later */}
-                  <div
-                    className="absolute inset-0"
-                    style={{
-                      background:
-                        "linear-gradient(120deg, rgba(22,92,255,.22), rgba(0,210,255,.10) 45%, rgba(255,255,255,.96))",
-                    }}
-                  />
-                  <div className="absolute inset-0 ring-1 ring-black/5" />
-                  <div className="absolute left-6 top-6 inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/80 px-3 py-1 text-xs font-medium text-[rgb(var(--fg))]/70">
-                    Hero highlights
-                  </div>
-                  <div className="absolute bottom-0 left-0 right-0 flex items-center justify-between gap-6 border-t border-black/5 bg-white/70 px-6 py-4 text-xs text-[rgb(var(--fg))]/55 backdrop-blur">
-                    <span>Event images/video montage</span>
-                    <span className="hidden sm:inline">Poster • lazy-load • premium</span>
-                  </div>
-                </div>
-              </div>
+            <h1 className="mt-8 text-[54px] leading-[0.95] font-semibold tracking-[-0.03em] text-white sm:text-[72px] lg:text-[88px]">
+              Strategic experiences.
+              <span className="block text-white/65">Stunning delivery.</span>
+            </h1>
 
-              {/* Featured formats (doc categories) */}
-              <div className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-3">
-                {["Conferences", "Brand Activations", "Exhibitions", "Social Events", "Festivals", "Corporate"].map(
-                  (t) => (
-                    <div
-                      key={t}
-                      className="rounded-2xl border border-black/5 bg-white/70 px-4 py-3 text-sm font-medium text-[rgb(var(--fg))]/70 shadow-[0_10px_28px_rgba(10,16,32,.05)]"
-                    >
-                      {t}
-                    </div>
-                  )
-                )}
-              </div>
+            <p className="mt-7 max-w-[60ch] text-base leading-relaxed text-white/75 sm:text-lg">
+              Aflink Events Ltd is the event management wing of Aflink Rwanda Ltd—delivering world-class,
+              end-to-end event solutions across Rwanda and the region.
+            </p>
+
+            <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <Button href="/request-quote">Request a Quote</Button>
+              <Button href="/request-quote" variant="secondary">
+                Book Consultation
+              </Button>
+              <Link
+                href="/contact"
+                className="text-sm font-medium text-white/75 hover:text-white transition sm:ml-3"
+              >
+                WhatsApp / Quick Contact →
+              </Link>
+            </div>
+
+            {/* Micro proof (Sparks-style: less “cardy”) */}
+            <div className="mt-12 grid gap-6 sm:grid-cols-3 border-t border-white/10 pt-8">
+              {[
+                ["15+ years", "via Aflink Rwanda Ltd"],
+                ["Rwanda + EAC", "regional capability"],
+                ["End-to-end", "creative + ops"],
+              ].map(([v, k]) => (
+                <div key={k} className="showline">
+                  <div className="text-lg font-semibold text-white">{v}</div>
+                  <div className="mt-1 text-sm text-white/65">{k}</div>
+                </div>
+              ))}
             </div>
           </div>
-
-          <div className="h-px w-full bg-black/5" />
         </div>
       </Container>
     </section>
